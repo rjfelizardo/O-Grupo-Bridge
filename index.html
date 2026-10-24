@@ -166,7 +166,7 @@ header.on{background:rgba(6,16,32,.86);backdrop-filter:blur(14px);-webkit-backdr
 .way .t{flex:1;min-width:0}
 .way small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .way b{font-weight:500;font-size:1rem;overflow-wrap:anywhere;user-select:all}
-.cp{flex:none;min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--gold-2);font:600 .8rem var(--sans);cursor:pointer}
+.cp{flex:none;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--gold-2);font:600 .8rem var(--sans);cursor:pointer}
 .cp:hover{background:rgba(224,184,74,.12)}
 @media (max-width:900px){.contact .box{grid-template-columns:1fr}}
 footer{background:rgba(6,16,32,.88);border-top:1px solid var(--line-soft);padding-block:30px calc(40px + env(safe-area-inset-bottom,0px));font-size:.84rem;color:var(--muted)}
@@ -420,10 +420,10 @@ section[id]{scroll-margin-top:76px}
         </div>
       </div>
       <div class="ways">
-        <div class="way"><div class="t"><small>WhatsApp · Rodrigo</small><b>+55 74 99913-4241</b></div><button class="cp" type="button" data-copy="+55 74 99913-4241">Copiar</button></div>
-        <div class="way"><div class="t"><small>WhatsApp · Grupo Bridge</small><b>+55 87 9159-8991</b></div><button class="cp" type="button" data-copy="+55 87 9159-8991">Copiar</button></div>
-        <div class="way"><div class="t"><small>E-mail</small><b>ogrupobridge@gmail.com</b></div><button class="cp" type="button" data-copy="rjfelizardo@gmail.com">Copiar</button></div>
-        <div class="way"><div class="t"><small>Instagram</small><b>@ogrupobridge</b></div><button class="cp" type="button" data-copy="@ogrupobridge">Copiar</button></div>
+        <div class="way"><div class="t"><small>WhatsApp · Rodrigo</small><b>+55 74 99913-4241</b></div><a class="cp" href="https://wa.me/5574999134241" target="_blank" rel="noopener">Abrir</a></div>
+        <div class="way"><div class="t"><small>WhatsApp · Grupo Bridge</small><b>+55 87 9159-8991</b></div><a class="cp" href="https://wa.me/558791598991" target="_blank" rel="noopener">Abrir</a></div>
+        <div class="way"><div class="t"><small>E-mail</small><b>ogrupobridge@gmail.com</b></div><a class="cp" href="mailto:ogrupobridge@gmail.com">Enviar</a></div>
+        <div class="way"><div class="t"><small>Instagram</small><b>@ogrupobridge</b></div><a class="cp" href="https://instagram.com/ogrupobridge" target="_blank" rel="noopener">Abrir</a></div>
       </div>
     </div>
   </div>
@@ -470,14 +470,6 @@ section[id]{scroll-margin-top:76px}
   var hd=document.getElementById('hd');
   function s(){hd.classList.toggle('on',(window.scrollY||0)>30);}
   s();addEventListener('scroll',s,{passive:true});
-  document.querySelectorAll('.cp').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var v=btn.getAttribute('data-copy'),old=btn.textContent;
-      function ok(){btn.textContent='Copiado';setTimeout(function(){btn.textContent=old;},1600);}
-      function fb(){var el=btn.parentNode.querySelector('b');if(el){var r=document.createRange();r.selectNodeContents(el);var g=getSelection();g.removeAllRanges();g.addRange(r);}btn.textContent='Selecionado';setTimeout(function(){btn.textContent=old;},1600);}
-      try{navigator.clipboard.writeText(v).then(ok,fb);}catch(e){fb();}
-    });
-  });
 })();
 </script>
 <script>
