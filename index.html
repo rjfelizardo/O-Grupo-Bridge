@@ -22,7 +22,7 @@
 html{scroll-behavior:smooth;background:var(--bg)}
 body{margin:0;background:transparent;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.bg{position:fixed;inset:0;z-index:-1;background:var(--bg)}
+.bg{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;background:var(--bg);transform:translateZ(0);will-change:transform;pointer-events:none}
 .bg img{width:100%;height:100%;object-fit:cover;object-position:72% 60%;display:block}
 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,16,32,.35) 0%,rgba(6,16,32,0) 30%,rgba(6,16,32,.25) 100%)}
 a{color:inherit}
@@ -450,6 +450,10 @@ section[id]{scroll-margin-top:76px}
   </div>
 </footer>
 
+<script>
+/* fundo fixo de verdade: em navegadores sem 100lvh, fixa a altura no maior valor visto (evita o recalculo ao esconder a barra) */
+(function(){try{if(CSS.supports('height','100lvh'))return;var bg=document.querySelector('.bg');if(!bg)return;var w=innerWidth,h=innerHeight;function set(){if(innerWidth!==w){w=innerWidth;h=innerHeight}else if(innerHeight>h){h=innerHeight}bg.style.height=h+'px'}set();addEventListener('resize',set)}catch(e){}})();
+</script>
 <script>
 (function(){
   
