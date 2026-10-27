@@ -564,6 +564,16 @@ section[id]{scroll-margin-top:76px}
             <option>Mais de 100</option>
           </select>
         </label>
+        <label><span class="lb">Em quanto tempo pretende implantar?</span>
+          <select id="lf-prazo" name="prazo">
+            <option value="">Escolha uma opção</option>
+            <option>Imediatamente</option>
+            <option>Em até 30 dias</option>
+            <option>De 1 a 3 meses</option>
+            <option>Mais de 3 meses</option>
+            <option>Só pesquisando por enquanto</option>
+          </select>
+        </label>
         <label><span class="lb">Conte um pouco sobre o seu negócio</span>
           <textarea id="lf-msg" name="mensagem" placeholder="Ex.: sou psicóloga e quero um app para meus pacientes"></textarea>
         </label>
@@ -638,7 +648,7 @@ requestAnimationFrame(function(t){last=t;tick(t)});})();
     if(!v('nome')) return msg('Por favor, informe seu nome.','err');
     if(!v('telefone')&&!v('email')){showExtra(true); return msg('Informe pelo menos um contato: WhatsApp ou e-mail.','err');}
     var d={nome:v('nome'),telefone:v('telefone'),email:v('email'),negocio:v('negocio'),ramo:v('ramo'),cidade:v('cidade'),
-      instagram:v('instagram'),produto:f.elements.produto.value,volume:f.elements.volume.value,mensagem:v('mensagem'),
+      instagram:v('instagram'),produto:f.elements.produto.value,volume:f.elements.volume.value,prazo:f.elements.prazo.value,mensagem:v('mensagem'),
       website:v('website'),origem:'site_grupo'};
     var t0=btn.textContent; btn.disabled=true; btn.textContent='Enviando...'; msg('');
     fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
