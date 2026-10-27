@@ -164,7 +164,7 @@ header.on{background:rgba(6,16,32,.86);backdrop-filter:blur(14px);-webkit-backdr
 @media (max-width:860px){.steps{grid-template-columns:1fr 1fr;gap:40px 20px}.steps li::after{display:none}}
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
 /* contato */
-.contact .box{padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.contact .box{padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
 .ways{display:grid;gap:12px}
 .way{display:flex;align-items:center;gap:14px;background:rgba(6,16,32,.55);border:1px solid var(--line-soft);border-radius:14px;padding:14px 16px;min-width:0}
 .way .t{flex:1;min-width:0}
@@ -173,6 +173,26 @@ header.on{background:rgba(6,16,32,.86);backdrop-filter:blur(14px);-webkit-backdr
 .cp{flex:none;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--gold-2);font:600 .8rem var(--sans);cursor:pointer}
 .cp:hover{background:rgba(224,184,74,.12)}
 @media (max-width:900px){.contact .box{grid-template-columns:1fr}}
+
+/* formulário de contato: vai para o CRM do Grupo */
+.lf{margin-top:28px;display:grid;gap:14px;max-width:560px}
+.lf .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+@media (max-width:560px){.lf .row{grid-template-columns:1fr}}
+.lf label{display:grid;gap:6px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.lf label .lb{display:block}
+.lf label span.opt{text-transform:none;letter-spacing:0;font-weight:300;opacity:.8}
+.lf input,.lf select,.lf textarea{width:100%;min-height:50px;padding:12px 16px;border-radius:14px;border:1px solid var(--line-soft);background:rgba(6,16,32,.55);color:var(--ink);font:400 1rem var(--sans);text-transform:none;letter-spacing:0}
+.lf textarea{min-height:96px;resize:vertical}
+.lf select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23E0B84A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.lf input::placeholder,.lf textarea::placeholder{color:rgba(180,192,212,.55)}
+.lf input:focus,.lf select:focus,.lf textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(224,184,74,.2)}
+.lf .hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.lf .hint{font-size:.84rem;color:var(--muted);font-weight:300}
+.lf button.btn{cursor:pointer;width:100%}
+.lf button.btn:disabled{opacity:.6;cursor:wait}
+.lf .st{min-height:1.4em;font-size:.92rem;font-weight:500}
+.lf .st.ok{color:#7BD99A}.lf .st.err{color:#FF9C8F}
+.lf .vol[hidden]{display:none}
 footer{background:rgba(6,16,32,.88);border-top:1px solid var(--line-soft);padding-block:30px calc(40px + env(safe-area-inset-bottom,0px));font-size:.84rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 32px;justify-content:space-between;align-items:center}
 footer .brand{font-size:.95rem;color:var(--ink)}
@@ -418,8 +438,63 @@ section[id]{scroll-margin-top:76px}
         <p class="eyebrow">Contato</p>
         <h2>Vamos construir essa ponte <em class="s">juntos.</em></h2>
         <p class="lead">Conte um pouco do seu trabalho e nós preparamos um protótipo para você ver como ficaria. Sem compromisso.</p>
+        <form class="lf" id="leadForm" novalidate>
+          <div class="row">
+            <label><span class="lb">Seu nome</span>
+              <input id="lf-nome" name="nome" type="text" autocomplete="name" required>
+            </label>
+            <label><span class="lb">WhatsApp com DDD</span>
+              <input id="lf-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="74 99999-9999">
+            </label>
+          </div>
+          <label><span class="lb">E-mail <span class="opt">(se preferir ser contatado por e-mail)</span></span>
+            <input id="lf-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com">
+          </label>
+          <div class="row">
+            <label><span class="lb">Nome do seu negócio <span class="opt">(opcional)</span></span>
+              <input id="lf-negocio" name="negocio" type="text" autocomplete="organization">
+            </label>
+            <label><span class="lb">Ramo de atuação <span class="opt">(opcional)</span></span>
+              <input id="lf-ramo" name="ramo" type="text" placeholder="Ex.: mentoria, clínica, loja">
+            </label>
+          </div>
+          <div class="row">
+            <label><span class="lb">Cidade <span class="opt">(opcional)</span></span>
+              <input id="lf-cidade" name="cidade" type="text" autocomplete="address-level2">
+            </label>
+            <label><span class="lb">Instagram do negócio <span class="opt">(opcional)</span></span>
+              <input id="lf-insta" name="instagram" type="text" placeholder="@seunegocio" autocapitalize="none" autocorrect="off">
+            </label>
+          </div>
+          <label><span class="lb">O que você procura?</span>
+            <select id="lf-produto" name="produto">
+              <option value="">Escolha uma opção</option>
+              <option>Bridge CRM (organizar clientes em funil)</option>
+              <option>Bridge Automation (Instagram e WhatsApp)</option>
+              <option>App com a minha marca</option>
+              <option>Loja virtual</option>
+              <option>Site ou landing page</option>
+              <option>Ainda não sei, quero conversar</option>
+            </select>
+          </label>
+          <label class="vol" id="lf-vol" hidden><span class="lb">Quantas mensagens você recebe por dia?</span>
+            <select id="lf-volume" name="volume">
+              <option value="">Escolha uma opção</option>
+              <option>Até 20</option>
+              <option>De 20 a 100</option>
+              <option>Mais de 100</option>
+            </select>
+          </label>
+          <label><span class="lb">Conte um pouco sobre o seu negócio <span class="opt">(opcional)</span></span>
+            <textarea id="lf-msg" name="mensagem" placeholder="Ex.: sou psicóloga e quero um app para meus pacientes"></textarea>
+          </label>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="hint">Informe o WhatsApp ou o e-mail. Usamos seus dados só para falar sobre o seu pedido.</p>
+          <button class="btn gold" type="submit">Pedir meu protótipo</button>
+          <p class="st" id="lf-status" role="status" aria-live="polite"></p>
+        </form>
         <div class="cta">
-          <a class="btn gold" href="https://wa.me/5574999134241?text=Ol%C3%A1%20Rodrigo%21%20Vi%20a%20p%C3%A1gina%20do%20Grupo%20Bridge%20e%20gostaria%20de%20pedir%20um%20prot%C3%B3tipo%20do%20meu%20app." target="_blank" rel="noopener">Pedir protótipo pelo WhatsApp</a>
+          <a class="btn gold" href="https://wa.me/5574999134241?text=Ol%C3%A1%20Rodrigo%21%20Vi%20a%20p%C3%A1gina%20do%20Grupo%20Bridge%20e%20gostaria%20de%20pedir%20um%20prot%C3%B3tipo%20do%20meu%20app." target="_blank" rel="noopener">Prefiro falar pelo WhatsApp</a>
           <a class="btn line" href="https://instagram.com/ogrupobridge" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
@@ -492,5 +567,35 @@ if(!document.hidden&&!held){if(Math.abs(g.scrollLeft-pos)>2)pos=g.scrollLeft;
 pos+=speed*dt;var w=loopW();if(pos>=w)pos-=w;if(pos<0)pos+=w;g.scrollLeft=pos}
 requestAnimationFrame(tick)}
 requestAnimationFrame(function(t){last=t;tick(t)});})();
+</script>
+<script>
+/* formulário de contato: envia ao Worker do Grupo, que grava e cria o lead no Bridge CRM */
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var ENDPOINT='https://bridge-instagram.bridgeatravessia.workers.dev/leads/submit';
+  var st=document.getElementById('lf-status'), btn=f.querySelector('button[type="submit"]');
+  var prod=document.getElementById('lf-produto'), vol=document.getElementById('lf-vol');
+  function togglevol(){var a=/automation/i.test(prod.value); vol.hidden=!a; if(!a) document.getElementById('lf-volume').value='';}
+  prod.addEventListener('change',togglevol);
+  function msg(t,c){st.textContent=t; st.className='st'+(c?' '+c:'');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(n){return f.elements[n].value.trim();};
+    if(!v('nome')) return msg('Por favor, informe seu nome.','err');
+    if(!v('telefone')&&!v('email')) return msg('Informe pelo menos um contato: WhatsApp ou e-mail.','err');
+    var d={nome:v('nome'),telefone:v('telefone'),email:v('email'),negocio:v('negocio'),ramo:v('ramo'),cidade:v('cidade'),
+      instagram:v('instagram'),produto:f.elements.produto.value,volume:f.elements.volume.value,mensagem:v('mensagem'),
+      website:v('website'),origem:'site_grupo'};
+    var t0=btn.textContent; btn.disabled=true; btn.textContent='Enviando...'; msg('');
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok&&j.ok,j:j};});})
+      .then(function(x){
+        if(x.ok){msg('Recebemos seu contato! Em breve falamos com você.','ok'); f.reset(); togglevol();}
+        else msg((x.j&&x.j.erro)||'Não foi possível enviar agora. Tente de novo em instantes.','err');
+      })
+      .catch(function(){msg('Erro de conexão. Verifique sua internet e tente de novo.','err');})
+      .then(function(){btn.disabled=false; btn.textContent=t0;});
+  });
+})();
 </script>
 </html>
