@@ -319,7 +319,7 @@ section[id]{scroll-margin-top:76px}
 
 <main>
 <section class="hero full" id="topo">
-  <div class="hv" aria-hidden="true"><img src="/ponte-hero.jpg?v=2" alt=""><video muted loop playsinline preload="metadata" poster="/ponte-hero.jpg?v=2"></video></div>
+  <div class="hv" aria-hidden="true"><img src="/ponte-hero.jpg" alt=""><video muted loop playsinline preload="metadata" poster="/ponte-hero.jpg"></video></div>
   <div class="wrap">
     <p class="eyebrow">Grupo Bridge · Criando pontes</p>
     <h1>A ponte entre o seu <em class="s">trabalho</em> e os seus clientes.</h1>
@@ -677,10 +677,10 @@ requestAnimationFrame(function(t){last=t;tick(t)});})();
 })();
 </script>
 <script>
-/* abertura em vídeo: toca só quando visível; com "reduzir movimento" fica a imagem parada */
+/* abertura em vídeo: escolhe o arquivo pelo tamanho da tela, toca só quando visível; com "reduzir movimento" fica a imagem parada */
 (function(){var v=document.querySelector('.hv video');if(!v)return;
   try{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;}catch(e){}
-  v.src='/ponte-hero.mp4?v=2';
+  v.src=(Math.max(screen.width,screen.height)*(devicePixelRatio||1)>1600&&innerWidth>700)?'/ponte-hero.mp4':'/ponte-hero-sm.mp4';
   v.addEventListener('playing',function(){v.classList.add('on');});
   function play(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
   if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?play():v.pause();}).observe(v);}else play();
