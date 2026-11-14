@@ -88,6 +88,10 @@ header.on{background:rgba(6,16,32,.86);backdrop-filter:blur(14px);-webkit-backdr
 .hero .btn.line{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(6,16,32,.6)}
 .menu-btn{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(6,16,32,.72)}
 @media (max-width:700px),(max-aspect-ratio:85/100){header.on{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(6,16,32,.95)}}
+/* emenda sem linha: a faixa abaixo do vídeo começa na mesma cor e clareia até a foto */
+.facts{position:relative}
+.facts::before{content:"";position:absolute;left:0;right:0;top:-1px;height:clamp(140px,22vh,220px);background:linear-gradient(180deg,#06101F 0%,rgba(6,16,32,.6) 45%,rgba(6,16,32,0) 100%);pointer-events:none;z-index:0}
+.facts ul{position:relative;z-index:1}
 /* veil sections */
 .veil{background:linear-gradient(180deg,rgba(6,16,32,0),var(--veil) 90px,var(--veil) calc(100% - 90px),rgba(6,16,32,0))}
 .veil.solid{background:var(--veil)}
