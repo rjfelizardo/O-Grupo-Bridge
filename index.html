@@ -82,7 +82,7 @@ header.on{background:rgba(6,16,32,.86);backdrop-filter:blur(14px);-webkit-backdr
 .hv video,.hv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 50%;display:block}
 .hv video{opacity:0;transition:opacity 1.2s ease}.hv video.on{opacity:1}
 .hv::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,16,32,.82) 0%,rgba(6,16,32,.55) 38%,rgba(6,16,32,.08) 66%,rgba(6,16,32,0) 100%)}
-@media (max-width:700px),(max-aspect-ratio:85/100){.hv video,.hv img{object-position:74% 50%}.hv::after{background:linear-gradient(180deg,rgba(6,16,32,.86) 0%,rgba(6,16,32,.7) 50%,rgba(6,16,32,.25) 80%,rgba(6,16,32,0) 100%)}}
+@media (max-width:700px),(max-aspect-ratio:85/100){.hv video,.hv img{object-position:70% 70%}.hv::after{background:linear-gradient(180deg,rgba(6,16,32,.72) 0%,rgba(6,16,32,.5) 42%,rgba(6,16,32,.12) 70%,rgba(6,16,32,0) 100%)}}
 /* veil sections */
 .veil{background:linear-gradient(180deg,rgba(6,16,32,0),var(--veil) 90px,var(--veil) calc(100% - 90px),rgba(6,16,32,0))}
 .veil.solid{background:var(--veil)}
@@ -677,10 +677,12 @@ requestAnimationFrame(function(t){last=t;tick(t)});})();
 })();
 </script>
 <script>
-/* abertura em vídeo: escolhe o arquivo pelo tamanho da tela, toca só quando visível; com "reduzir movimento" fica a imagem parada */
+/* abertura em vídeo: vídeo vertical em tela em pé, horizontal nas demais; toca só quando visível; com "reduzir movimento" fica a imagem parada */
 (function(){var v=document.querySelector('.hv video');if(!v)return;
   try{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;}catch(e){}
-  v.src=(Math.max(screen.width,screen.height)*(devicePixelRatio||1)>1600&&innerWidth>700)?'/ponte-hero.mp4':'/ponte-hero-sm.mp4';
+  var em_pe=matchMedia('(max-width:700px),(max-aspect-ratio:85/100)').matches;
+  if(em_pe){v.poster='/ponte-hero-vertical.jpg';var im=v.parentNode.querySelector('img');if(im)im.src='/ponte-hero-vertical.jpg';}
+  v.src=em_pe?'/ponte-hero-vertical.mp4':((Math.max(screen.width,screen.height)*(devicePixelRatio||1)>1600)?'/ponte-hero.mp4':'/ponte-hero-sm.mp4');
   v.addEventListener('playing',function(){v.classList.add('on');});
   function play(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
   if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?play():v.pause();}).observe(v);}else play();
